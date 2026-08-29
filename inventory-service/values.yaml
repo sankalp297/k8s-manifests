@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: 515517431159.dkr.ecr.ap-south-1.amazonaws.com/inventory-service
+  tag: v1
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+env: {}
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+hpa:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 5
+  cpuTarget: 70
+
+pdb:
+  enabled: true
+  minAvailable: 1
